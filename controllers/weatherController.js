@@ -79,8 +79,4 @@ const getWeatherHistory = async (req, res) => {
   }
 };
 
-module.exports = {
-  getWeatherHistory,
-};
-
 export { getWeatherForecast, getWeatherHistory };

@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDb from "./config/db.js";
+import cors from "cors";
 import locationRoutes from "./routes/locationRoute.js";
 import weatherRoute from "./routes/weatherRoute.js";
 
@@ -14,6 +15,7 @@ connectDb();
 const app = express();
 
 // middleware
+app.use(cors());
 app.use(express.json());
 
 // routes
