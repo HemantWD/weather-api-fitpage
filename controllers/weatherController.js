@@ -44,7 +44,6 @@ const getWeatherForecast = async (req, res) => {
 };
 
 // METHOD:GET || get history of weather forecast
-const axios = require("axios");
 
 const getWeatherHistory = async (req, res) => {
   try {
