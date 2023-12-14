@@ -111,7 +111,7 @@ const getLocationByIdController = async (req, res) => {
         message: "Location not found",
       });
     }
-
+    console.log(getLocation);
     res.status(200).send({
       success: true,
       data: getLocation,

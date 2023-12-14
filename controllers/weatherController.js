@@ -44,6 +44,44 @@ const getWeatherForecast = async (req, res) => {
 };
 
 // METHOD:GET || get history of weather forecast
-const getWeatherHistory = async (req, res) => {};
+const axios = require("axios");
 
-export { getWeatherForecast };
+const getWeatherHistory = async (req, res) => {
+  try {
+    const { lat, lon, start, end } = req.query;
+
+    // Check if any required parameter is missing
+    if (!lat || !lon || !start || !end) {
+      return res.status(400).send({
+        success: false,
+        message:
+          "Missing required parameters. Please provide lat, lon, start, end",
+      });
+    }
+
+    // Make the API request using the provided parameters
+    const historicData = await axios.get(
+      `https://history.openweathermap.org/data/2.5/history/city?lat=${lat}&lon=${lon}&type=hour&start=${start}&end=${end}&appid=f8ce8e34435656266bc926511cea95c4`
+    );
+
+    // console.log(historicData.data);
+
+    res.status(200).send({
+      success: true,
+      message: "Historical Data retrieved successfully",
+      data: historicData.data,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+module.exports = {
+  getWeatherHistory,
+};
+
+export { getWeatherForecast, getWeatherHistory };
